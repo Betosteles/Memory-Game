@@ -6,17 +6,12 @@ game_rows=3
 game_columns=6 #only even numbers // solo numeros pares permitidos
 
 #Card Images
-carta_01 = '01.png'
-carta_02 = '02.png'
-carta_03 = '03.png'
-carta_04 = '04.png'
-carta_05 = '05.png'
-carta_06 = '06.png'
-carta_07 = '07.png'
-carta_08 = '08.png'
+card_images =['01.png','02.png','03.png','04.png','05.png','06.png','07.png','08.png','09.png']
+
 
 #x_inicial, Yinial, X_final, Y_final
-inicio_carta_coordenada = [502, 333, 656, 513] #First card dimension
+inicio_carta_coordenada = [502, 333, 656, 513] #card dimensions
+
 
 class Carta:
     def __init__(self, id, x, y, ancho, largo):
@@ -40,11 +35,11 @@ class Carta:
     def identify_card(self):
         times=0
 
-        while self.estado == "Reverso" or times > 3:
+        while self.estado == "Reverso" and times < 3:
 
-            for i in range(1, 10):
+            for i in range(0, len(card_images)):
                 
-                template = f'{i:02d}.png'                
+                template = card_images[i]                
                 
                 if pyautogui.locateOnScreen(template,region=(self.x, self.y, self.ancho, self.largo) , confidence=0.7):
                     self.estado = str(i)
@@ -112,3 +107,4 @@ for r in range(1,game_rows+1):
 
         check_and_click_matching_states(tablero,r,c+1)
         
+
