@@ -16,7 +16,7 @@ carta_07 = '07.png'
 carta_08 = '08.png'
 
 #x_inicial, Yinial, X_final, Y_final
-inicio_carta_coordenada = [502, 333, 656, 513] #card dimensions
+inicio_carta_coordenada = [502, 333, 656, 513] #First card dimension
 
 
 
