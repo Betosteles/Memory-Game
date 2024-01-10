@@ -18,40 +18,6 @@ carta_08 = '08.png'
 #x_inicial, Yinial, X_final, Y_final
 inicio_carta_coordenada = [502, 333, 656, 513] #First card dimension
 
-
-
-def find_average_coordinates(image_path, confidence=0.9, threshold_distance=10):
-    # Find all occurrences of the image on the screen
-    matches = list(pyautogui.locateAllOnScreen(image_path, confidence=confidence))
-
-    # Use a list to store groups of coordinates
-    coordinate_groups = []
-
-    # Group coordinates that are close to each other
-    for match in matches:
-        coordinate = (match.left, match.top)
-
-        grouped = False
-        for group in coordinate_groups:
-            if any(abs(coordinate[0] - existing_coord[0]) < threshold_distance and
-                   abs(coordinate[1] - existing_coord[1]) < threshold_distance
-                   for existing_coord in group):
-                group.append(coordinate)
-                grouped = True
-                break
-
-        if not grouped:
-            coordinate_groups.append([coordinate])
-
-    # Calculate and return the rounded average coordinates for each group
-    average_coordinates = []
-    for group in coordinate_groups:
-        x_avg = round(sum(coord[0] for coord in group) / len(group))
-        y_avg = round(sum(coord[1] for coord in group) / len(group))
-        average_coordinates.append((x_avg, y_avg))
-
-    return average_coordinates
-
 class Carta:
     def __init__(self, id, x, y, ancho, largo):
         self.id = id
